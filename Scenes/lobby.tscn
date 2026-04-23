@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cn7mf6v32xb1"]
+
+[ext_resource type="PackedScene" uid="uid://dt684hdpa30hc" path="res://Scenes/UI/lobby_ui.tscn" id="1_nvaej"]
+
+[node name="Lobby" type="Control" unique_id=1605871356]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LobbyUI" parent="." unique_id=312408345 instance=ExtResource("1_nvaej")]
+layout_mode = 1

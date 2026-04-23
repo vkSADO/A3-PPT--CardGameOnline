@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTT_CardGame", "PTT_CardGame.csproj", "{7A45DB8B-99B9-4632-A8A5-41D4F193D95D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A45DB8B-99B9-4632-A8A5-41D4F193D95D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A45DB8B-99B9-4632-A8A5-41D4F193D95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A45DB8B-99B9-4632-A8A5-41D4F193D95D}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{7A45DB8B-99B9-4632-A8A5-41D4F193D95D}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{7A45DB8B-99B9-4632-A8A5-41D4F193D95D}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{7A45DB8B-99B9-4632-A8A5-41D4F193D95D}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bsc7nf63ln5tp"]
+
+[ext_resource type="PackedScene" uid="uid://cos15e3bytlv6" path="res://Scenes/UI/match_ui.tscn" id="1_34er5"]
+
+[node name="Match" type="Node2D" unique_id=1143419279]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1063518297]
+
+[node name="MatchUI" parent="UI" unique_id=1639320269 instance=ExtResource("1_34er5")]
