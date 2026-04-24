@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cn7mf6v32xb1"]
+
+[ext_resource type="Script" uid="uid://dmutr0sn771qw" path="res://PPTcliente/Scenes/UI/Lobby.cs" id="1_ry8wc"]
+
+[node name="Lobby" type="Control" unique_id=1605871356]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ry8wc")
+
+[node name="StatusLabel" type="Label" parent="." unique_id=944426614]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 57.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Bem-vido(a) ao PPT Card Game Online."
+
+[node name="Container" type="CenterContainer" parent="." unique_id=1702806013]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 220.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container" unique_id=1983858011]
+layout_mode = 2
+alignment = 2
+
+[node name="FindMatchButton" type="Button" parent="Container/VBoxContainer" unique_id=395156850]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Buscar Partida"
+
+[node name="ServerStatusMessage" type="Label" parent="Container/VBoxContainer" unique_id=335672488]
+layout_mode = 2
+text = "AGUARDANDO PARTIDA..."
+horizontal_alignment = 1
+vertical_alignment = 2
+

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ck6bopwcbcor2"]
+
+[ext_resource type="Script" uid="uid://bgiw8hrh2xcow" path="res://PPTservidor/Infrastructure/SignalIR/NetworkManager.cs" id="1_qy5hj"]
+
+[node name="NetworkManager" type="Node" unique_id=1742992010]
+script = ExtResource("1_qy5hj")
+

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using PPTcliente.Application.Services;
-using PPTcliente.Application.Hubs;
+using PPTservidor.Application.Services;
+using PPTservidor.Application.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,3 +33,4 @@ app.MapHub<MatchHub>("/matchhub");
 app.MapGet("/", () => "Servidor PPT Online rodando!");
 
 app.Run();
+

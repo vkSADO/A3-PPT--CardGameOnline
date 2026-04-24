@@ -1,0 +1,285 @@
+[gd_scene format=3 uid="uid://cos15e3bytlv6"]
+
+[ext_resource type="Script" uid="uid://bkxcisrw1yco3" path="res://PPTcliente/Scenes/UI/MatchUi.cs" id="1_a5def"]
+[ext_resource type="Texture2D" uid="uid://cjl8wltjtl74f" path="res://icon.svg" id="2_pgc1w"]
+
+[node name="MatchUI" type="Control" unique_id=1639320269]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a5def")
+
+[node name="WorkStation" type="VBoxContainer" parent="." unique_id=1413372722]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameAreaContainer" type="VBoxContainer" parent="WorkStation" unique_id=895857448]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="Control" parent="WorkStation/GameAreaContainer" unique_id=2016928096]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Spacebar" type="HBoxContainer" parent="WorkStation/GameAreaContainer/PanelContainer" unique_id=877761923]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerPerfilContainer1" type="HBoxContainer" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar" unique_id=1983607713]
+layout_mode = 2
+
+[node name="Icon_Player1" type="TextureRect" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer1" unique_id=1643809132]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("2_pgc1w")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer1" unique_id=1205419569]
+layout_mode = 2
+
+[node name="Player01_Name" type="Label" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer1/VBoxContainer" unique_id=894503266]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+text = "P1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreP1" type="Label" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer1/VBoxContainer" unique_id=461373627]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar" unique_id=950881746]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerPerfilContainer2" type="HBoxContainer" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar" unique_id=1481244016]
+layout_mode = 2
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer2" unique_id=1730460528]
+layout_mode = 2
+
+[node name="Player01_Name" type="Label" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer2/VBoxContainer" unique_id=130821863]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+text = "P1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreP1" type="Label" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer2/VBoxContainer" unique_id=1825591376]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon_Player1" type="TextureRect" parent="WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer2" unique_id=331748640]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("2_pgc1w")
+expand_mode = 1
+
+[node name="ActionLog" type="Label" parent="WorkStation/GameAreaContainer" unique_id=1134118966]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "Action Log played"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WorkStation/GameAreaContainer" unique_id=984546998]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSeparator3" type="VSeparator" parent="WorkStation/GameAreaContainer/HBoxContainer" unique_id=1798806008]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="PanelCardAccused" type="Panel" parent="WorkStation/GameAreaContainer/HBoxContainer" unique_id=1760308465]
+visible = false
+custom_minimum_size = Vector2(390, 210)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="CardSelectionContainer" type="HBoxContainer" parent="WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused" unique_id=254348252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RockCardButton" type="Button" parent="WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused/CardSelectionContainer" unique_id=1384528614]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Pedra"
+
+[node name="PaperCardButton" type="Button" parent="WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused/CardSelectionContainer" unique_id=1300638699]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Papel"
+
+[node name="ScissorsCardButton" type="Button" parent="WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused/CardSelectionContainer" unique_id=1104323916]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Tesoura"
+
+[node name="VSeparator" type="VSeparator" parent="WorkStation/GameAreaContainer/HBoxContainer" unique_id=553736710]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Control" parent="WorkStation/GameAreaContainer/HBoxContainer" unique_id=970913438]
+custom_minimum_size = Vector2(505, 360)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel" unique_id=578688895]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardContainerPlayer1" type="VBoxContainer" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer" unique_id=502521824]
+layout_mode = 2
+
+[node name="LabelNameP1" type="Label" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer1" unique_id=2015410616]
+layout_mode = 2
+text = "Voce"
+
+[node name="CenterContainer" type="CenterContainer" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer1" unique_id=1876665447]
+layout_mode = 2
+
+[node name="CardArea" type="Panel" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer1/CenterContainer" unique_id=881139371]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="CardContainerPlayer2" type="VBoxContainer" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer" unique_id=1994451220]
+layout_mode = 2
+
+[node name="LabelNameP2" type="Label" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer2" unique_id=605691189]
+layout_mode = 2
+text = "Adversario"
+horizontal_alignment = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer2" unique_id=1244610032]
+layout_mode = 2
+
+[node name="CardArea" type="Panel" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer2/CenterContainer" unique_id=184874147]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="VS_Icon" type="TextureRect" parent="WorkStation/GameAreaContainer/HBoxContainer/Panel" unique_id=1097823477]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4009901
+anchor_top = 0.3611111
+anchor_right = 0.5990099
+anchor_bottom = 0.6388889
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pgc1w")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VSeparator2" type="VSeparator" parent="WorkStation/GameAreaContainer/HBoxContainer" unique_id=727080311]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionButtonsContainer" type="HBoxContainer" parent="WorkStation" unique_id=203892204]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="WorkStation/ActionButtonsContainer" unique_id=638268559]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccusedButton" type="Button" parent="WorkStation/ActionButtonsContainer" unique_id=67650321]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Acusar"
+
+[node name="VSeparator2" type="VSeparator" parent="WorkStation/ActionButtonsContainer" unique_id=737019934]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BluffedButton" type="Button" parent="WorkStation/ActionButtonsContainer" unique_id=1924998898]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Anunciar"
+
+[node name="VSeparator" type="VSeparator" parent="WorkStation/ActionButtonsContainer" unique_id=140007338]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FinalizedButton" type="Button" parent="WorkStation/ActionButtonsContainer" unique_id=1954872641]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Finalizar"
+
+[node name="VSeparator4" type="VSeparator" parent="WorkStation/ActionButtonsContainer" unique_id=797529539]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardDeckPanel" type="PanelContainer" parent="." unique_id=1809841016]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -150.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardDeckPanel" unique_id=988433965]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CardDeckPanel/VBoxContainer" unique_id=1930309872]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CardDeckPanel/VBoxContainer/HBoxContainer" unique_id=572387006]
+layout_mode = 2
+text = "Card Deck "
+
+[node name="QuatityCardsDeck" type="Label" parent="CardDeckPanel/VBoxContainer/HBoxContainer" unique_id=367938409]
+layout_mode = 2
+text = "10"
+
+[node name="IconCardDeck" type="TextureRect" parent="CardDeckPanel/VBoxContainer" unique_id=394143868]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_pgc1w")
+expand_mode = 1
+
