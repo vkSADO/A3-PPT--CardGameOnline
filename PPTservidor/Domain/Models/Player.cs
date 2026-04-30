@@ -16,7 +16,10 @@ public class Player
     // Estado transitório do turno atual
     public CardType? SelectedCard { get; set; } // A carta real jogada virada para baixo
     public CardType? AnnouncedCard { get; set; } // A carta que o jogador DIZ ter jogado
+    public CardType? LastPlayedCard { get; set; } // A carta que foi jogada no round anterior
+    public bool HasSubmittedAnnouncement { get; set; } = false; // Se já finalizou a fase de anúncio
     public bool HasAccusedBluff { get; set; } = false; // Se chamou o blefe do oponente neste turno
+    public bool HasSubmittedAccusation { get; set; } = false; // Se já submeteu decisão de acusação
 
     
     public void InitializeDeck()
@@ -32,7 +35,9 @@ public class Player
     {
         SelectedCard = null;
         AnnouncedCard = null;
+        HasSubmittedAnnouncement = false;
         HasAccusedBluff = false;
+        HasSubmittedAccusation = false;
     }
 }
 

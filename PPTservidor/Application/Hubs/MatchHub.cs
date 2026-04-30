@@ -90,7 +90,7 @@ public class MatchHub : Hub
     }
 
     // 2. O cliente Godot chama este método quando o jogador escolhe a carta e o blefe
-    public async Task SubmitPlay(string matchId, string playerId, CardType announcedCard)
+    public async Task SubmitPlay(string matchId, string playerId, CardType? announcedCard)
     {
         // Validações iniciais
         if (string.IsNullOrWhiteSpace(matchId) || string.IsNullOrWhiteSpace(playerId))
@@ -122,8 +122,6 @@ public class MatchHub : Hub
         {
             var updatedMatch = _matchService.GetMatch(matchId);
             _logger.LogInformation($"Jogada aceita em {matchId} por {playerId}. Fase atual: {updatedMatch.CurrentPhase}");
-            
-            // Notifica a sala inteira que o estado mudou
             await Clients.Group(matchId).SendAsync(MatchStateUpdatedEvent, updatedMatch);
         }
         else
@@ -195,21 +193,28 @@ public class MatchHub : Hub
     // 4. Limpeza se alguém fechar o jogo inesperadamente
     public override async Task OnDisconnectedAsync(Exception exception)
     {
-        _logger.LogInformation($"Cliente desconectado: {Context.ConnectionId}. Erro: {exception?.Message}");
+       _logger.LogInformation($"Cliente desconectado: {Context.ConnectionId}. Erro: {exception?.Message}");
 
-        // Limpa da fila de espera se estava lá
+        // 1. Limpa da fila de espera se estava lá
         lock (_lock)
         {
             if (_waitingConnectionId == Context.ConnectionId)
             {
-                _logger.LogInformation($"Removendo jogador da fila: {_waitingPlayer?.Id}");
                 _waitingPlayer = null;
                 _waitingConnectionId = null;
             }
         }
 
-        // TODO futuro: Lógica para dar a vitória ao oponente se alguém desconectar no meio da partida
-        // Isso requer um sistema para rastrear quais conexões estão em quais partidas
+        // 2. Aplica regra de desistência se estava no meio de um jogo
+        var affectedMatch = _matchService.HandlePlayerDisconnect(Context.ConnectionId);
+        
+        if (affectedMatch != null)
+        {
+            _logger.LogInformation($"Partida {affectedMatch.MatchId} encerrada por W.O. devido à queda de um jogador.");
+            
+            // Avisa o jogador que sobreviveu que o jogo acabou (MatchStateUpdatedEvent = "MatchStateUpdated")
+            await Clients.Group(affectedMatch.MatchId).SendAsync("MatchStateUpdated", affectedMatch);
+        }
 
         await base.OnDisconnectedAsync(exception);
     }

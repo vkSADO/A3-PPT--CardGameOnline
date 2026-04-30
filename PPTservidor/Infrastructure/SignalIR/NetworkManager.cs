@@ -87,11 +87,10 @@ public partial class NetworkManager : Node
         }
     }
 
-    public async void SubmitPlay(string matchId, string playerId, CardType announcedCard)
+    public async void SubmitPlay(string matchId, string playerId, CardType? announcedCard)
     {
         if (_connection.State == HubConnectionState.Connected)
         {
-            // Envia apenas o anúncio para o Hub do servidor
             await _connection.InvokeAsync("SubmitPlay", matchId, playerId, announcedCard);
         }
     }

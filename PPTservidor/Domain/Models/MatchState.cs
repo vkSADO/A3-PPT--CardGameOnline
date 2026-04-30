@@ -5,7 +5,7 @@ namespace PPTservidor.Domain.Models;
 
 public class MatchState
 {
-    public string MatchId { get; private set; } = Guid.NewGuid().ToString();
+    public string MatchId { get; set; } = Guid.NewGuid().ToString();
     public Player Player1 { get; set; }
     public Player Player2 { get; set; }
     

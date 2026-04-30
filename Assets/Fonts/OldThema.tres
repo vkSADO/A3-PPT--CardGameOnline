@@ -1,7 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://jm5tvhrbtael"]
 
-[ext_resource type="FontFile" uid="uid://ciqmlv214l1u2" path="res://Assets/Fonts/chomsky/Chomsky.woff" id="1_oy6ev"]
-[ext_resource type="FontFile" uid="uid://dfuqw1av8jnee" path="res://Assets/Fonts/chomsky/Chomsky.otf" id="2_oy6ev"]
+[ext_resource type="FontFile" uid="uid://b55kumeci2fdu" path="res://Assets/Fonts/robot_2/Robot_Font.otf" id="1_1pnhu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy6ev"]
 corner_radius_top_left = 5
@@ -12,6 +11,6 @@ Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0.9529412, 0.8980392, 0.72156864, 1)
 Button/colors/font_outline_color = Color(0.95686275, 0.8980392, 0.69803923, 1)
 Button/font_sizes/font_size = 20
-Button/fonts/font = ExtResource("1_oy6ev")
+Button/fonts/font = ExtResource("1_1pnhu")
 Button/styles/normal = SubResource("StyleBoxFlat_oy6ev")
-Label/fonts/font = ExtResource("2_oy6ev")
+Label/fonts/font = ExtResource("1_1pnhu")

@@ -39,18 +39,15 @@ public class MatchService
 
     private void DrawCardForPlayer(Player player)
     {
-        if (player.Deck.Count > 0)
+        if(player.Deck.Count > 0 )
         {
-            var rnd = new Random();
-            int index = rnd.Next(player.Deck.Count);
+            int index = Random.Shared.Next(player.Deck.Count);
             player.SelectedCard = player.Deck[index];
-            player.Deck.RemoveAt(index); // A carta é descartada [cite: 24]
+            player.Deck.RemoveAt(index);
         }
         else
         {
-            // Se o deck acabar, perde 1 ponto por turno sem carta [cite: 24]
-            player.SelectedCard = null; 
-            player.Score -= 1;
+            player.SelectedCard = null;
         }
     }
 
@@ -61,18 +58,19 @@ public class MatchService
     }
 
     // 2. Fase de Anúncio: O jogador escolhe a carta real e a carta que diz ter
-    public bool SubmitPlay(string matchId, string playerId, CardType announcedCard)
+    public bool SubmitPlay(string matchId, string playerId, CardType? announcedCard)
     {
         var match = GetMatch(matchId);
         if (match == null || match.CurrentPhase != MatchPhase.AnnouncementPhase) return false;
 
         var player = match.GetPlayer(playerId);
-        if (player == null || player.AnnouncedCard.HasValue) return false;
+        if (player == null || player.HasSubmittedAnnouncement) return false;
 
         player.AnnouncedCard = announcedCard;
+        player.HasSubmittedAnnouncement = true;
 
-        // Se ambos anunciaram, vai para a acusação
-        if (match.Player1.AnnouncedCard.HasValue && match.Player2.AnnouncedCard.HasValue)
+        // Se ambos finalizaram a fase de anúncio, vai para a acusação
+        if (match.Player1.HasSubmittedAnnouncement && match.Player2.HasSubmittedAnnouncement)
         {
             match.CurrentPhase = MatchPhase.AccusationPhase;
         }
@@ -92,12 +90,13 @@ public class MatchService
             return false;
 
         player.HasAccusedBluff = accusesOpponent;
+        player.HasSubmittedAccusation = true;
 
         // Só avança se ambos decidiram se acusam ou não
-        var opponent = match.GetOpponent(playerId);
-        // Aqui assumimos que no Front o jogador envia 'false' se clicar em "Passar"
-        // Para o MVP, avançamos se este jogador agiu e o oponente agiu (ou estamos simplificando para 1 acionamento)
-        match.CurrentPhase = MatchPhase.RevealPhase;
+        if (match.Player1.HasSubmittedAccusation && match.Player2.HasSubmittedAccusation)
+        {
+            match.CurrentPhase = MatchPhase.RevealPhase;
+        }
 
         return true;
     }
@@ -119,9 +118,10 @@ public class MatchService
             return;
         }
 
-        // 1. Indentifica quem blefou (A carta real e dirente da anunciada??)
-        bool p1Bluffed = p1.SelectedCard != p1.AnnouncedCard;
-        bool p2Bluffed = p2.SelectedCard != p2.AnnouncedCard;
+        // 1. Identifica quem blefou 
+        // (Só é blefe se ele anunciou alguma coisa E a carta anunciada for diferente da carta real)
+        bool p1Bluffed = p1.AnnouncedCard.HasValue && p1.SelectedCard != p1.AnnouncedCard.Value;
+        bool p2Bluffed = p2.AnnouncedCard.HasValue && p2.SelectedCard != p2.AnnouncedCard.Value;
 
         // 2. Identifica o vencedor normal (Sem anuncio)
         bool p1Wins  = Beats(p1.SelectedCard.Value, p2.SelectedCard.Value);
@@ -159,12 +159,28 @@ public class MatchService
             }
         }
 
-        // TODO: Adicionar lógica de remover a carta do Deck/Hand do jogador
-        // Regra: "A carta usada é descartada... Se o deck acabar, o jogador perde 1 ponto por turno"
+        // 5. Verifica condição de vitória (5 pontos OU fim do baralho)
+        if (p1.Score >= 5 || p2.Score >= 5 || p1.Deck.Count == 0 || p2.Deck.Count == 0)
+        {
+            match.CurrentPhase = MatchPhase.GameOver;
+        }
+        else
+        {
+            // SALVA A CARTA ANTES DE DESCARTAR PARA O CLIENTE PODER VER!
+            p1.LastPlayedCard = p1.SelectedCard;
+            p2.LastPlayedCard = p2.SelectedCard;
 
-        // Verificar condição de vitória
-        CheckWinCondition(match);
+            // 1- Limpa o que foi anunciado
+            p1.ResetTurnState();
+            p2.ResetTurnState();
 
+            // 2- Compra novas cartas do deck para o próximo turno
+            DrawCardForPlayer(p1);
+            DrawCardForPlayer(p2);
+
+            // 3- Volta a partida pra fase de anúncio
+            match.CurrentPhase = MatchPhase.AnnouncementPhase;
+        }
     }
 
     private void ProcessScoring(Player accuser, Player accused, bool accusedBluffed)
@@ -196,6 +212,35 @@ public class MatchService
             StartRound(match); // Saca as cartas para a próxima ronda
             match.CurrentPhase = MatchPhase.AnnouncementPhase;
         }
+    }
+
+    public MatchState HandlePlayerDisconnect(string connectionId)
+    {
+        // Procura se o jogador estava em alguma partida ativa
+        var matchPair = _activeMatches.FirstOrDefault(m => 
+            m.Value.Player1?.ConnectionId == connectionId || 
+            m.Value.Player2?.ConnectionId == connectionId);
+
+        var match = matchPair.Value;
+        
+        if (match != null && match.CurrentPhase != MatchPhase.GameOver)
+        {
+            // Descobre quem desconectou e quem ficou
+            var disconnectedPlayer = match.Player1.ConnectionId == connectionId ? match.Player1 : match.Player2;
+            var remainingPlayer = match.Player1.ConnectionId == connectionId ? match.Player2 : match.Player1;
+
+            if (remainingPlayer != null)
+            {
+                // Dá a vitória máxima ao jogador que ficou (W.O.)
+                remainingPlayer.Score = 5;
+                disconnectedPlayer.Score = 0;
+            }
+
+            match.CurrentPhase = MatchPhase.GameOver;
+            return match; // Retorna a partida para avisarmos o jogador que ficou
+        }
+
+        return null;
     }
 
     // Regra auxiliar clássica

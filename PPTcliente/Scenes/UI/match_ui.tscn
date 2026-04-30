@@ -10,10 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dqj10kkrg7nd" path="res://Assets/Images/PapelCard.png" id="5_3ovvm"]
 [ext_resource type="Texture2D" uid="uid://c8yf8q4lq75dd" path="res://Assets/Images/verso.png" id="5_dpw1s"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_6hc5w"]
-font = ExtResource("3_b8ulq")
-font_size = 35
-
 [sub_resource type="LabelSettings" id="LabelSettings_h1q0u"]
 font = ExtResource("4_6hc5w")
 font_size = 35
@@ -27,7 +23,7 @@ font = ExtResource("3_b8ulq")
 font_size = 100
 font_color = Color(0, 0, 0, 1)
 
-[node name="MatchUI" type="Control" unique_id=1639320269 node_paths=PackedStringArray("_playerName1", "_playerName2", "_scorePlayer1", "_scorePlayer2", "_quatityCardDeck", "_labelLog", "_btnPedra", "_btnPapel", "_btnTesoura", "_btnAccuser", "_btnAnnuncement", "_btnFinilized", "_panelCardAccused", "_CardSelectedTextureArea", "_OpponentSelectedTextureArea")]
+[node name="MatchUI" type="Control" unique_id=1639320269 node_paths=PackedStringArray("_playerName1", "_playerName2", "_scorePlayer1", "_scorePlayer2", "_quatityCardDeck", "_labelLog", "_btnPedra", "_btnPapel", "_btnTesoura", "_btnAccuser", "_btnAnnuncement", "_btnFinilized", "_panelCardAccused", "_CardSelectedTextureArea", "_OpponentSelectedTextureArea", "_notification")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +37,7 @@ _playerName2 = NodePath("WorkStation/GameAreaContainer/PanelContainer/Spacebar/P
 _scorePlayer1 = NodePath("WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer1/VBoxContainer/ScoreP1")
 _scorePlayer2 = NodePath("WorkStation/GameAreaContainer/PanelContainer/Spacebar/PlayerPerfilContainer2/VBoxContainer/ScoreP2")
 _quatityCardDeck = NodePath("CardDeckPanel/VBoxContainer/HBoxContainer/QuatityCardsDeck")
-_labelLog = NodePath("WorkStation/GameAreaContainer/ActionLog")
+_labelLog = NodePath("WorkStation/GameAreaContainer/HBoxContainer2/ActionLog")
 _btnPedra = NodePath("WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused/CardSelectionContainer/RockCardButton")
 _btnPapel = NodePath("WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused/CardSelectionContainer/PaperCardButton")
 _btnTesoura = NodePath("WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused/CardSelectionContainer/ScissorsCardButton")
@@ -51,6 +47,7 @@ _btnFinilized = NodePath("WorkStation/ActionButtonsContainer/FinalizedButton")
 _panelCardAccused = NodePath("WorkStation/GameAreaContainer/HBoxContainer/PanelCardAccused")
 _CardSelectedTextureArea = NodePath("WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer1/CenterContainer/MyCardTexture")
 _OpponentSelectedTextureArea = NodePath("WorkStation/GameAreaContainer/HBoxContainer/Panel/HBoxContainer/CardContainerPlayer2/CenterContainer/OpponentCard")
+_notification = NodePath("Notification")
 
 [node name="WorkStation" type="VBoxContainer" parent="." unique_id=1413372722]
 layout_mode = 1
@@ -70,6 +67,7 @@ layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="WorkStation/GameAreaContainer/PanelContainer" unique_id=1114540757]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,7 +107,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "P1"
 horizontal_alignment = 1
@@ -119,7 +116,6 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "00"
 horizontal_alignment = 1
@@ -141,7 +137,6 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "P1"
 horizontal_alignment = 1
@@ -151,7 +146,6 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "00"
 horizontal_alignment = 1
@@ -167,13 +161,18 @@ expand_mode = 1
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="ActionLog" type="Label" parent="WorkStation/GameAreaContainer" unique_id=1134118966]
+[node name="HBoxContainer2" type="HBoxContainer" parent="WorkStation/GameAreaContainer" unique_id=360746924]
+layout_mode = 2
+alignment = 1
+
+[node name="ActionLog" type="Label" parent="WorkStation/GameAreaContainer/HBoxContainer2" unique_id=1134118966]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 25
 text = "Action Log played"
-label_settings = SubResource("LabelSettings_6hc5w")
+horizontal_alignment = 3
+vertical_alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WorkStation/GameAreaContainer" unique_id=984546998]
 layout_mode = 2
@@ -221,7 +220,7 @@ custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-texture_normal = ExtResource("5_3ovvm")
+texture_normal = ExtResource("4_3ovvm")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -377,3 +376,22 @@ layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("4_2rqt0")
 expand_mode = 1
+
+[node name="Notification" type="Label" parent="." unique_id=1483335463]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3159722
+anchor_top = 0.7631173
+anchor_right = 0.6840278
+anchor_bottom = 0.91280866
+offset_top = -3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.11198568, 1, 0.35347992, 1)
+theme_override_font_sizes/font_size = 50
+text = "Notification"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
