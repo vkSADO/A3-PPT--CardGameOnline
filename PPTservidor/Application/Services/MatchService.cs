@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using PPTservidor.Domain.Enums;
 using PPTservidor.Domain.Models;
+using Microsoft.Azure.Cosmos;
 
 namespace PPTservidor.Application.Services;
 
@@ -12,7 +13,9 @@ public class MatchService
 {
     // Utilizamos ConcurrentDictionary porque o SignalR é multithreaded.
     // Várias requisições podem tentar aceder às partidas em simultâneo.
+
     private readonly ConcurrentDictionary<string, MatchState> _activeMatches = new();
+    private readonly Container _matchHistoryContainer;
 
     // 1. Inicialização da Partida
     public MatchState StartNewMatch(Player p1, Player p2)
@@ -26,6 +29,11 @@ public class MatchService
 
         _activeMatches.TryAdd(match.MatchId, match);
         return match;
+    }
+
+    public MatchService(CosmosClient cosmosClient)
+    {
+        _matchHistoryContainer = cosmosClient.GetContainer("PPTOnlineDB", "MatchHistory");
     }
 
     // Saque de carta do deck
@@ -163,6 +171,21 @@ public class MatchService
         if (p1.Score >= 5 || p2.Score >= 5 || p1.Deck.Count == 0 || p2.Deck.Count == 0)
         {
             match.CurrentPhase = MatchPhase.GameOver;
+
+            // --- SALVAR NO COSMOS DB ---
+            string winner = p1.Score >= p2.Score ? p1.Id : p2.Id;
+            var record = new MatchRecord
+            {
+                MatchId = match.MatchId,
+                Player1Id = p1.Id,
+                Player2Id = p2.Id,
+                Player1Score = p1.Score,
+                Player2Score = p2.Score,
+                WinnerId = winner
+            };
+
+            // Salva de forma assíncrona (não precisa usar await aqui para não travar a resposta do SignalR)
+            _ = _matchHistoryContainer.CreateItemAsync(record, new PartitionKey(record.Id));
         }
         else
         {
@@ -237,8 +260,20 @@ public class MatchService
             }
 
             match.CurrentPhase = MatchPhase.GameOver;
+            // Salva o W.O. no banco!
+            var record = new MatchRecord
+            {
+                MatchId = match.MatchId,
+                Player1Id = match.Player1.Id,
+                Player2Id = match.Player2.Id,
+                Player1Score = match.Player1.Score,
+                Player2Score = match.Player2.Score,
+                WinnerId = remainingPlayer.Id // Quem ficou ganhou
+            };
+            _ = _matchHistoryContainer.CreateItemAsync(record, new PartitionKey(record.Id));
             return match; // Retorna a partida para avisarmos o jogador que ficou
         }
+
 
         return null;
     }

@@ -11,6 +11,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_28flt")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1690894761]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.94867164, 0.70387197, 1)
+
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1685595949]
 layout_mode = 1
 anchors_preset = 15
@@ -22,4 +31,18 @@ grow_vertical = 2
 [node name="Button" type="Button" parent="CenterContainer" unique_id=225241200]
 layout_mode = 2
 theme_override_font_sizes/font_size = 100
-text = "JOGAR"
+text = "PLAY"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1628611238]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=525142469]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "PPT online"

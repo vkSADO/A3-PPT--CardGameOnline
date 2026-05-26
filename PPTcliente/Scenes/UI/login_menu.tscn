@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cxymkdclfse56"]
+
+[ext_resource type="Script" uid="uid://2yef2ww271m0" path="res://PPTcliente/Scripts/UI/LoginMenu.cs" id="1_lef4v"]
+[ext_resource type="Texture2D" uid="uid://cjl8wltjtl74f" path="res://icon.svg" id="2_l8g0h"]
+
+[node name="LoginMenu" type="Control" unique_id=1970487425 node_paths=PackedStringArray("LoginButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lef4v")
+LoginButton = NodePath("VBoxContainer/CenterContainer/Button")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1131823773]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.9490196, 0.7019608, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=492956608]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=284529137]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "PPT Online Login"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1622067209]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_l8g0h")
+stretch_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1846509064]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1180985814]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/CenterContainer" unique_id=1326808575]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Login com o Google"
